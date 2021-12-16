@@ -37,6 +37,18 @@ public class Topico {
 	// Relacionamento, um para muitos - atributo topico class -> resposta
 	@OneToMany(mappedBy = "topico")
 	private List<Resposta> respostas = new ArrayList<>();
+	
+	// Contrutor default
+	public Topico() {
+		
+	}
+	
+	public Topico(String titulo, String mensagem, Curso curso) {
+		super();
+		this.titulo = titulo;
+		this.mensagem = mensagem;
+		this.curso = curso;
+	}
 
 	@Override
 	public int hashCode() {

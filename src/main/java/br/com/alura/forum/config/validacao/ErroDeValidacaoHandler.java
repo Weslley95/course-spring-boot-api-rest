@@ -23,7 +23,7 @@ public class ErroDeValidacaoHandler {
 	 * Tratamento para alterar as mansagens
 	 * Tratamento de erro para qualquer 'Not validation'
 	 * 
-	 * @ResponseStatus return HTTP ao inves de HTTP 200
+	 * @ResponseStatus re	turn HTTP ao inves de HTTP 200
 	 * @param exception
 	 * 
 	 * @return dto erro

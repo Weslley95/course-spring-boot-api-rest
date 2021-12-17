@@ -8,12 +8,14 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.alura.forum.controller.dto.DetalhesDoTopicoDto;
 import br.com.alura.forum.controller.dto.TopicoDto;
 import br.com.alura.forum.controller.form.TopicoForm;
 import br.com.alura.forum.modelo.Topico;
@@ -37,8 +39,11 @@ public class TopicosController {
 	private CursoRepository cursoRepository;
 	
 	/**
-	 * Topico
+	 * Listagem de tópico
 	 * TopicoForm -> API p/ Cliente
+	 * 
+	 * @param String nomeCurso
+	 * 
 	 * @return object topicos
 	 */
 	@GetMapping
@@ -60,7 +65,11 @@ public class TopicosController {
 	}
 	
 	/**
-	 * Cadastrar
+	 * Cadastro
+	 * 
+	 * @param form formulario
+	 * @param uriBuilder requisição HTTP
+	 * 
 	 * TopicoForm -> Cliente p/ API
 	 * Caso utilize void será devolvido HTTP 200 (resposta sem conteudo)
 	 */
@@ -76,5 +85,18 @@ public class TopicosController {
 		
 		// Return HTTP 201, com conteudo 
 		return ResponseEntity.created(uri).body(new TopicoDto(topico));
+	}
+	
+	/**
+	 * Detalhamento do topico
+	 * 
+	 * @param Long id do topico
+	 */
+	@GetMapping("/{id}")
+	public DetalhesDoTopicoDto detalhar(@PathVariable Long id) {
+		Topico topico = topicoRepository.getOne(id);
+		
+		// Converter topico para topicoDto
+		return new DetalhesDoTopicoDto(topico);
 	}
 }
